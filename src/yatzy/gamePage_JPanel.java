@@ -541,49 +541,95 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void checkValues(){
-        if(Player[N].getEttor() == 1){
+    private void setFalse(){
+        
             btnEttor.setEnabled(false);
-            btnEttor.setText(Integer.toString(Player[N].getEttor()));
-        }else{
-            btnEttor.setEnabled(true);
-            btnEttor.setText("0");
-        }
-        if(Player[N].getTvaor() == 2){
             btnTvaor.setEnabled(false);
-            btnTvaor.setText(Integer.toString(Player[N].getTvaor()));
-        }else{
-            btnTvaor.setEnabled(true);
-            btnTvaor.setText("0");
-        }
-        if(Player[N].getTreor() == 3){
             btnTreor.setEnabled(false);
-            btnTreor.setText(Integer.toString(Player[N].getTreor()));
-        }else{
-            btnTreor.setEnabled(true);
-            btnTreor.setText("0");
-        }
-        if(Player[N].getFyror() == 4){
             btnFyror.setEnabled(false);
-            btnFyror.setText(Integer.toString(Player[N].getFyror()));
-        }else{
-            btnFyror.setEnabled(true);
-            btnFyror.setText("0");
-        }
-        if(Player[N].getFemmor() == 5){
             btnFemmor.setEnabled(false);
-            btnFemmor.setText(Integer.toString(Player[N].getFemmor()));
-        }else{
-            btnFemmor.setEnabled(true);
-            btnFemmor.setText("0");
-        }
-        if(Player[N].getSexor() == 6){
             btnSexor.setEnabled(false);
-            btnSexor.setText(Integer.toString(Player[N].getSexor()));
-        }else{
-            btnSexor.setEnabled(true);
-            btnSexor.setText("0");
+            btnEttPar.setEnabled(false);
+            btnTvaPar.setEnabled(false);
+            btnTriss.setEnabled(false);
+            btnFyrtal.setEnabled(false);
+            btnLitenStege.setEnabled(false);
+            btnStorStege.setEnabled(false);
+            btnKak.setEnabled(false);
+            btnChans.setEnabled(false);
+            btnYatzy.setEnabled(false);
+            
+    }
+    
+    private void updateScore(){
+        
+        txfSumma.setText(Integer.toString(Player[N].getEttor()+ Player[N].getTvaor()+  
+        Player[N].getTreor()+ Player[N].getFyror()+  Player[N].getFemmor()+ Player[N].getSexor()));
+        
+        if( Integer.valueOf(txfSumma.getText()) >= 63)
+        {
+            txfBonus.setText("50");
         }
+        
+        txfPoang.setText(Integer.toString(Integer.valueOf(txfSumma.getText()) + 
+                Player[N].getEttPar() + Player[N].getTvaPar() + Player[N].getTriss() +
+                Player[N].getFyrtal() + Player[N].getLitenStege() + Player[N].getStorStege() +
+                Player[N].getKak() + Player[N].getChans() + Player[N].getYatzy()));
+    
+    }
+    
+    private void checkDice(){
+        for (int i = 0; i <= 4; i++){
+            
+            if(Player[N].getEttor() == 1){
+                btnEttor.setEnabled(false);
+                btnEttor.setText(Integer.toString(Player[N].getEttor()));
+            }else if (Dice[i].getVarde() == 1){
+                btnEttor.setEnabled(true);
+            }else{
+                btnEttor.setEnabled(true);
+                btnEttor.setText("0");
+            }
+            if(Player[N].getTvaor() == 2){
+                btnTvaor.setEnabled(false);
+                btnTvaor.setText(Integer.toString(Player[N].getTvaor()));
+            }else if(Dice[i].getVarde() == 2){
+                btnTvaor.setEnabled(true);
+            }else{
+                btnTvaor.setEnabled(true);
+                btnTvaor.setText("0");
+            }
+            if(Player[N].getTreor() == 3){
+                btnTreor.setEnabled(false);
+                btnTreor.setText(Integer.toString(Player[N].getTreor()));
+            }else if(Dice[i].getVarde() == 3){
+                btnTreor.setEnabled(true);
+                btnTreor.setText("0");
+            }
+            if(Player[N].getFyror() == 4){
+                btnFyror.setEnabled(false);
+                btnFyror.setText(Integer.toString(Player[N].getFyror()));
+            }else if(Dice[i].getVarde() == 4){
+                btnFyror.setEnabled(true);
+                btnFyror.setText("0");
+            }
+            if(Player[N].getFemmor() == 5){
+                btnFemmor.setEnabled(false);
+                btnFemmor.setText(Integer.toString(Player[N].getFemmor()));
+            }else if(Dice[i].getVarde() == 5){
+                btnFemmor.setEnabled(true);
+                btnFemmor.setText("0");
+            }
+            if(Player[N].getSexor() == 6){
+                btnSexor.setEnabled(false);
+                btnSexor.setText(Integer.toString(Player[N].getSexor()));
+            }else if(Dice[i].getVarde() == 6){
+                btnSexor.setEnabled(true);
+                btnSexor.setText("0");
+            }
+
+        }
+        
         if(Player[N].getEttPar() > 0){
             btnEttPar.setEnabled(false);
             btnEttPar.setText(Integer.toString(Player[N].getEttPar()));
@@ -649,41 +695,6 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         }
         
 
-    }
-    
-    private void updateScore(){
-        
-        txfSumma.setText(Integer.toString(Player[N].getEttor()+ Player[N].getTvaor()+  
-        Player[N].getTreor()+ Player[N].getFyror()+  Player[N].getFemmor()+ Player[N].getSexor()));
-        
-        if( Integer.valueOf(txfSumma.getText()) >= 63)
-        {
-            txfBonus.setText("50");
-        }
-        
-        txfPoang.setText(Integer.toString(Integer.valueOf(txfSumma.getText()) + 
-                Player[N].getEttPar() + Player[N].getTvaPar() + Player[N].getTriss() +
-                Player[N].getFyrtal() + Player[N].getLitenStege() + Player[N].getStorStege() +
-                Player[N].getKak() + Player[N].getChans() + Player[N].getYatzy()));
-    
-    }
-    
-    private void checkDice(){
-        for (int i = 0; i <= 4; i++){
-          if(Dice[i].getVarde() == 1){
-              btnEttor.setEnabled(true);
-          }if(Dice[i].getVarde() == 2){
-              btnTvaor.setEnabled(true);
-          }if(Dice[i].getVarde() == 3){
-              btnTreor.setEnabled(true);
-          }if(Dice[i].getVarde() == 4){
-              btnFyror.setEnabled(true);
-          }if(Dice[i].getVarde() == 5){
-              btnFemmor.setEnabled(true);
-          }if(Dice[i].getVarde() == 6){
-              btnSexor.setEnabled(true);
-          }
-        }
     
     }
     
@@ -707,7 +718,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                 boxRe4.setSelected(false);
             }
             
-            checkValues();
+            setFalse();
             updateScore();
             checkDice();
             
