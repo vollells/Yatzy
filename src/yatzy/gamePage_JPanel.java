@@ -541,6 +541,77 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
+    private boolean checkPar (){
+        boolean trueOrFalse = false; 
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j ){
+                    trueOrFalse = true;
+                    break outerLoop;
+                }
+            }
+        }
+        
+        return trueOrFalse;
+    }
+    private boolean checkTvaPar (){
+        boolean trueOrFalse = false; 
+        boolean diceV1 = false;
+        boolean diceV2 = false;
+        int dice1 = 0;
+        int dice2 = 0;
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j){
+                    dice1 = i;
+                    dice2 = j;
+                    diceV1 = true;
+                    break outerLoop;
+                }
+            }
+        }
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j && dice1 != i 
+                                        && dice1 != j && dice2 != i  && dice2 != j)
+                {
+                    diceV2 = true;
+                    break outerLoop;
+                }
+            }
+        }
+        if (diceV1 == true && diceV2 == true){ trueOrFalse = true;}
+        return trueOrFalse;
+    }
+    private boolean checkTriss (){
+        boolean trueOrFalse = false; 
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j ){
+                    trueOrFalse = true;
+                    break outerLoop;
+                }
+            }
+        }
+        
+        return trueOrFalse;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     private void setFalse(){
         
             btnEttor.setEnabled(false);
@@ -581,38 +652,38 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     private void checkDice(){
         for (int i = 0; i <= 4; i++){
             
-            if(Player[N].getEttor() == 1){
+            if(Player[N].getEttor() > 0){
                 btnEttor.setEnabled(false);
                 btnEttor.setText(Integer.toString(Player[N].getEttor()));
             }else if (Dice[i].getVarde() == 1){
                 btnEttor.setEnabled(true);
-            }else{
-                btnEttor.setEnabled(true);
                 btnEttor.setText("0");
             }
-            if(Player[N].getTvaor() == 2){
+            
+            if(Player[N].getTvaor() > 0){
                 btnTvaor.setEnabled(false);
                 btnTvaor.setText(Integer.toString(Player[N].getTvaor()));
             }else if(Dice[i].getVarde() == 2){
                 btnTvaor.setEnabled(true);
-            }else{
-                btnTvaor.setEnabled(true);
                 btnTvaor.setText("0");
             }
-            if(Player[N].getTreor() == 3){
+            
+            if(Player[N].getTreor() > 0){
                 btnTreor.setEnabled(false);
                 btnTreor.setText(Integer.toString(Player[N].getTreor()));
             }else if(Dice[i].getVarde() == 3){
                 btnTreor.setEnabled(true);
                 btnTreor.setText("0");
             }
-            if(Player[N].getFyror() == 4){
+            
+            if(Player[N].getFyror() > 0){
                 btnFyror.setEnabled(false);
                 btnFyror.setText(Integer.toString(Player[N].getFyror()));
             }else if(Dice[i].getVarde() == 4){
                 btnFyror.setEnabled(true);
                 btnFyror.setText("0");
             }
+            
             if(Player[N].getFemmor() == 5){
                 btnFemmor.setEnabled(false);
                 btnFemmor.setText(Integer.toString(Player[N].getFemmor()));
@@ -620,6 +691,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                 btnFemmor.setEnabled(true);
                 btnFemmor.setText("0");
             }
+            
             if(Player[N].getSexor() == 6){
                 btnSexor.setEnabled(false);
                 btnSexor.setText(Integer.toString(Player[N].getSexor()));
@@ -633,15 +705,21 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         if(Player[N].getEttPar() > 0){
             btnEttPar.setEnabled(false);
             btnEttPar.setText(Integer.toString(Player[N].getEttPar()));
-        }else{
+        }else if(checkPar() == true){
             btnEttPar.setEnabled(true);
+            btnEttPar.setText("0");
+        }else{
+            btnEttPar.setEnabled(false);
             btnEttPar.setText("0");
         }
         if(Player[N].getTvaPar() > 0){
             btnTvaPar.setEnabled(false);
             btnTvaPar.setText(Integer.toString(Player[N].getTvaPar()));
-        }else{
+        }else if (checkTvaPar() == true){
             btnTvaPar.setEnabled(true);
+            btnTvaPar.setText("0");
+        }else{
+            btnTvaPar.setEnabled(false);
             btnTvaPar.setText("0");
         }
         if(Player[N].getTriss() > 0){
@@ -699,7 +777,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     }
     
     private void btnRullaTarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRullaTarnActionPerformed
-
+        
         if(reRoll == 0){ 
             
             prevN = N;
@@ -720,17 +798,19 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             
             setFalse();
             updateScore();
-            checkDice();
+
             
             for (int i= 0; i<=4 ; i++){
                 Dice[i].setVarde();
-                System.out.println("1");
             }
+            
+            checkDice();
             
             reRoll = 3;
             lblPlayerName.setText(Player[N].getNamn()+" | 3 Rerolls left");
     
         }else if(reRoll>0){
+            
             
             if(boxRe.isSelected()){
                 Dice[0].setVarde();
@@ -747,6 +827,9 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             if(boxRe4.isSelected()){
                 Dice[4].setVarde();
             }
+            
+            setFalse();
+            checkDice();
             
             reRoll -= 1;
             lblPlayerName.setText( Player[N].getNamn() +" | 0 Rerolls left");
@@ -836,7 +919,6 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     
     public void paintComponent(Graphics g)
     {   
-        System.out.println("3");
         super.paintComponent(g);
         
             for (int i= 0; i<=4 ; i++){
