@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package yatzy;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 
 
 
@@ -21,8 +16,12 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     private int N = 4;
     private int prevN;
     private int reRoll = 0;
+    private int gameRound = 0;    
     static int numPlayers = 0;
     static String playerName[]  = new String[4];
+    private boolean discard = false;
+    private boolean discardDice = false;
+    private boolean firstRound = false;
     
     newDice Dice[] = {new newDice(167),new newDice(263),new newDice(359),new newDice(455),new newDice(551)};
     
@@ -31,8 +30,8 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     
     
     
-
-
+    
+       
     
     /**
      * Creates new form gamePage_JPanel
@@ -54,8 +53,8 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         btnTvaPar = new javax.swing.JButton();
         btnTriss = new javax.swing.JButton();
         btnFyrtal = new javax.swing.JButton();
-        btnLitenStege = new javax.swing.JButton();
         btnStorStege = new javax.swing.JButton();
+        btnLitenStege = new javax.swing.JButton();
         btnKak = new javax.swing.JButton();
         btnChans = new javax.swing.JButton();
         btnYatzy = new javax.swing.JButton();
@@ -89,16 +88,22 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         txfSumma = new javax.swing.JTextField();
         txfBonus = new javax.swing.JTextField();
         txfPoang = new javax.swing.JTextField();
-        boxRe = new javax.swing.JCheckBox();
-        boxRe1 = new javax.swing.JCheckBox();
-        boxRe2 = new javax.swing.JCheckBox();
-        boxRe3 = new javax.swing.JCheckBox();
-        boxRe4 = new javax.swing.JCheckBox();
+        lblTurn = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(660, 660));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
             }
         });
 
@@ -138,21 +143,21 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             }
         });
 
-        btnLitenStege.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        btnLitenStege.setText("0");
-        btnLitenStege.setEnabled(false);
-        btnLitenStege.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLitenStegeActionPerformed(evt);
-            }
-        });
-
         btnStorStege.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         btnStorStege.setText("0");
         btnStorStege.setEnabled(false);
         btnStorStege.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStorStegeActionPerformed(evt);
+            }
+        });
+
+        btnLitenStege.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnLitenStege.setText("0");
+        btnLitenStege.setEnabled(false);
+        btnLitenStege.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLitenStegeActionPerformed(evt);
             }
         });
 
@@ -320,20 +325,8 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         txfPoang.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPoang.setText("100");
 
-        boxRe.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
-        boxRe.setText("Re-Roll?");
-
-        boxRe1.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
-        boxRe1.setText("Re-Roll?");
-
-        boxRe2.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
-        boxRe2.setText("Re-Roll?");
-
-        boxRe3.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
-        boxRe3.setText("Re-Roll?");
-
-        boxRe4.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
-        boxRe4.setText("Re-Roll?");
+        lblTurn.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
+        lblTurn.setText("Turn ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -361,11 +354,11 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btnLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblFyrtal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -382,7 +375,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                             .addComponent(lblEttPar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(btnEttPar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,40 +418,24 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblPlayerName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boxRe)
-                .addGap(12, 12, 12)
-                .addComponent(boxRe1)
-                .addGap(18, 18, 18)
-                .addComponent(boxRe2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boxRe3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxRe4))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblYatzy)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblYatzy)
+                    .addComponent(lblTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblYatzy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPlayerName)
-                        .addGap(47, 47, 47))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boxRe1)
-                            .addComponent(boxRe2)
-                            .addComponent(boxRe4)
-                            .addComponent(boxRe3)
-                            .addComponent(boxRe))
-                        .addGap(10, 10, 10)))
+                .addContainerGap()
+                .addComponent(lblYatzy, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(lblTurn)
+                .addGap(5, 5, 5)
+                .addComponent(lblPlayerName)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -479,11 +456,11 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLitenStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnStorStege, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEttor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,31 +514,18 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                         .addComponent(txfPoang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPoang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRullaTarn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private boolean checkPar (){
-        boolean trueOrFalse = false; 
+    private int checkPar (){
         
-        outerLoop:
-        for(int i = 0; i <= 4; i++){
-            for(int j = 0; j <= 4; j++){
-                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j ){
-                    trueOrFalse = true;
-                    break outerLoop;
-                }
-            }
-        }
-        
-        return trueOrFalse;
-    }
-    private boolean checkTvaPar (){
-        boolean trueOrFalse = false; 
+        int trueOrFalse = 0; 
         boolean diceV1 = false;
         boolean diceV2 = false;
         int dice1 = 0;
         int dice2 = 0;
+        int dice3 = 0;
         
         outerLoop:
         for(int i = 0; i <= 4; i++){
@@ -581,23 +545,77 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                 if (Dice[i].getVarde() == Dice[j].getVarde() && i != j && dice1 != i 
                                         && dice1 != j && dice2 != i  && dice2 != j)
                 {
+                    dice3 = i;
                     diceV2 = true;
                     break outerLoop;
                 }
             }
         }
-        if (diceV1 == true && diceV2 == true){ trueOrFalse = true;}
+        
+        if (diceV1 == true && diceV2 == true){ 
+            if (Dice[dice1].getVarde() > Dice[dice3].getVarde()){
+                trueOrFalse = Dice[dice1].getVarde();
+            }else{
+                trueOrFalse = Dice[dice3].getVarde();
+            }   
+        }else if(diceV1 == false && diceV2 == true){
+            trueOrFalse = Dice[dice3].getVarde();
+        }else if (diceV1 == true && diceV2 == false){
+            trueOrFalse = Dice[dice1].getVarde();
+        }
         return trueOrFalse;
     }
-    private boolean checkTriss (){
-        boolean trueOrFalse = false; 
+    
+    private int checkTvaPar (){
+        int trueOrFalse = 0; 
+        boolean diceV1 = false;
+        boolean diceV2 = false;
+        int dice1 = 0;
+        int dice2 = 0;
+        int dice3 = 0;
         
         outerLoop:
         for(int i = 0; i <= 4; i++){
             for(int j = 0; j <= 4; j++){
-                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j ){
-                    trueOrFalse = true;
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j){
+                    dice1 = i;
+                    dice2 = j;
+                    diceV1 = true;
                     break outerLoop;
+                }
+            }
+        }
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j && dice1 != i 
+                                        && dice1 != j && dice2 != i  && dice2 != j)
+                {
+                    dice3 = i;
+                    diceV2 = true;
+                    break outerLoop;
+                }
+            }
+        }
+        if (diceV1 == true && diceV2 == true){ 
+            trueOrFalse = Dice[dice1].getVarde() + Dice[dice3].getVarde();
+        }
+        return trueOrFalse;
+    }
+    
+    private int checkTriss (){
+        int trueOrFalse = 0; 
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                for(int k = 0; k <= 4; k++){
+                    if (Dice[i].getVarde() == Dice[j].getVarde() && Dice[k].getVarde() == Dice[i].getVarde() 
+                      && i != j && i != k && j != k){
+                        trueOrFalse = Dice[i].getVarde();
+                        break outerLoop;
+                    }
                 }
             }
         }
@@ -605,12 +623,228 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         return trueOrFalse;
     }
     
+    private int checkFyrtal (){
+        int trueOrFalse = 0; 
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                for(int k = 0; k <= 4; k++){
+                    for(int l = 0; l <= 4; l++){
+                        if (Dice[i].getVarde() == Dice[j].getVarde() && Dice[i].getVarde() == Dice[k].getVarde() 
+                                && Dice[i].getVarde() == Dice[l].getVarde() && i != j && i != k && i != l && j != k
+                                && j != l && k != l){
+                            trueOrFalse = Dice[i].getVarde();
+                            break outerLoop;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return trueOrFalse;
+    }
+    
+    private int checkLStege (){
+        int trueOrFalse = 0; 
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            if(Dice[i].getVarde() == 1){
+                System.out.println("1");
+                for(int j = 0; j <= 4; j++){
+                    if(Dice[j].getVarde() == 2){
+                        System.out.println("2");
+                        for(int k = 0; k <= 4; k++){
+                            if(Dice[k].getVarde() == 3){
+                                System.out.println("3");
+                                for(int l = 0; l <= 4; l++){
+                                    if(Dice[l].getVarde() == 4){
+                                        System.out.println("4");
+                                        for(int m = 0; m <= 4; m++){
+                                            if(Dice[m].getVarde() == 5){
+                                                trueOrFalse = 15;
+                                                break outerLoop;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+        
+        return trueOrFalse;
+    }
+    
+    private int checkSStege (){
+        int trueOrFalse = 0; 
+
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            if(Dice[i].getVarde() == 2){
+                for(int j = 0; j <= 4; j++){
+                    if(Dice[j].getVarde() == 3){
+                        for(int k = 0; k <= 4; k++){
+                            if(Dice[k].getVarde() == 4){
+                                for(int l = 0; l <= 4; l++){
+                                    if(Dice[l].getVarde() == 5){
+                                        for(int m = 0; m <= 4; m++){
+                                            if(Dice[m].getVarde() == 6){
+                                                trueOrFalse = 20;
+                                                break outerLoop;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+        
+        return trueOrFalse;
+    }
+    
+    private int checkKak (){
+        
+        boolean trueOrFalse1 = false; 
+        boolean trueOrFalse2 = false;
+        int trueOrFalse3 = 0;
+        int dice1 = 0;
+        int dice2 = 0;
+        int dice3 = 0; 
+        int dice4 = 0;
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                for(int k = 0; k <= 4; k++){
+                    if (Dice[i].getVarde() == Dice[j].getVarde() && Dice[k].getVarde() == Dice[i].getVarde() 
+                      && i != j && i != k && j != k){
+                        dice1 = i;
+                        dice2 = j;
+                        dice3 = k;
+                        trueOrFalse2 = true;
+                        break outerLoop;
+                    }
+                }
+            }
+        }
+        
+        outerLoop:
+        for(int i = 0; i <= 4; i++){
+            for(int j = 0; j <= 4; j++){
+                if (Dice[i].getVarde() == Dice[j].getVarde() && i != j && dice1 != i && dice1 != j
+                        && dice2 != i && dice2 != j && dice3 != i && dice3 != j){
+                    trueOrFalse1 = true;
+                    dice4 = i;
+                    break outerLoop;
+                }
+            }
+        }
+        
+        if (trueOrFalse1 == true && trueOrFalse2 == true){
+            trueOrFalse3 = (Dice[dice1].getVarde() * 3) + (Dice[dice4].getVarde()* 2);
+        }
+        return trueOrFalse3;
+    }
+    
+    private int checkYatzy(){
+        int trueOrFalse = 0;
+            
+        if (Dice[0].getVarde() == Dice[1].getVarde() && Dice[0].getVarde() == Dice[2].getVarde()
+            && Dice[0].getVarde() == Dice[3].getVarde() && Dice[0].getVarde() == Dice[4].getVarde()){
+            trueOrFalse = Dice[0].getVarde();
+        }
+        return trueOrFalse;
+    }
     
     
     
     
     
-    
+    private void setTrue(){
+        if(Player[N].isDiscardEtt() == false && Player[N].getEttor() == 0 ){
+            btnEttor.setEnabled(true);
+        }else{
+            btnEttor.setEnabled(false);
+        }
+        if(Player[N].isDiscardTva() == false && Player[N].getTvaor() == 0 ){
+            btnTvaor.setEnabled(true);
+        }else{
+            btnTvaor.setEnabled(false);
+        }
+        if(Player[N].isDiscardTre() == false && Player[N].getTreor() == 0 ){
+            btnTreor.setEnabled(true);
+        }else{
+            btnTreor.setEnabled(false);
+        }
+        if(Player[N].isDiscardFyra() == false && Player[N].getFyror() == 0 ){
+            btnFyror.setEnabled(true);
+        }else{
+            btnFyror.setEnabled(false);
+        }
+        if(Player[N].isDiscardFem() == false && Player[N].getFemmor() == 0 ){
+            btnFemmor.setEnabled(true);
+        }else{
+            btnFemmor.setEnabled(false);
+        }
+        if(Player[N].isDiscardSex() == false && Player[N].getSexor() == 0 ){
+            btnSexor.setEnabled(true);
+        }else{
+            btnSexor.setEnabled(false);
+        }
+        if(Player[N].isDiscardEttPar() == false && Player[N].getEttPar() == 0 ){
+            btnEttPar.setEnabled(true);
+        }else{
+            btnEttPar.setEnabled(false);
+        }
+        if(Player[N].isDiscardTvaPar() == false && Player[N].getTvaPar() == 0 ){
+            btnTvaPar.setEnabled(true);
+        }else{
+            btnTvaPar.setEnabled(false);
+        }
+        if(Player[N].isDiscardTriss() == false && Player[N].getTriss() == 0 ){
+            btnTriss.setEnabled(true);
+        }else{
+            btnTriss.setEnabled(false);
+        }
+        if(Player[N].isDiscardFyrtal() == false && Player[N].getFyrtal() == 0 ){
+            btnFyrtal.setEnabled(true);
+        }else{
+            btnFyrtal.setEnabled(false);
+        }
+        if(Player[N].isDiscardSStege() == false && Player[N].getStorStege() == 0 ){
+            btnStorStege.setEnabled(true);
+        }else{
+            btnStorStege.setEnabled(false);
+        }
+        if(Player[N].isDiscardLStege() == false && Player[N].getLitenStege() == 0 ){
+            btnLitenStege.setEnabled(true);
+        }else{
+            btnLitenStege.setEnabled(false);
+        }
+        if(Player[N].isDiscardKak() == false && Player[N].getKak() == 0 ){
+            btnKak.setEnabled(true);
+        }else{
+            btnKak.setEnabled(false);
+        }
+        if(Player[N].isDiscardChans() == false && Player[N].getChans() == 0 ){
+            btnChans.setEnabled(true);
+        }else{
+            btnChans.setEnabled(false);
+        }
+        if(Player[N].isDiscardYatzy() == false && Player[N].getYatzy() == 0 ){
+            btnYatzy.setEnabled(true);
+        }else{
+            btnYatzy.setEnabled(false);
+        }
+        
+    }
     
     private void setFalse(){
         
@@ -624,8 +858,8 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             btnTvaPar.setEnabled(false);
             btnTriss.setEnabled(false);
             btnFyrtal.setEnabled(false);
-            btnLitenStege.setEnabled(false);
             btnStorStege.setEnabled(false);
+            btnLitenStege.setEnabled(false);
             btnKak.setEnabled(false);
             btnChans.setEnabled(false);
             btnYatzy.setEnabled(false);
@@ -642,7 +876,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
             txfBonus.setText("50");
         }
         
-        txfPoang.setText(Integer.toString(Integer.valueOf(txfSumma.getText()) + 
+        txfPoang.setText(Integer.toString(Integer.valueOf(txfSumma.getText()) + Integer.valueOf(txfBonus.getText()) +
                 Player[N].getEttPar() + Player[N].getTvaPar() + Player[N].getTriss() +
                 Player[N].getFyrtal() + Player[N].getLitenStege() + Player[N].getStorStege() +
                 Player[N].getKak() + Player[N].getChans() + Player[N].getYatzy()));
@@ -652,123 +886,194 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     private void checkDice(){
         for (int i = 0; i <= 4; i++){
             
-            if(Player[N].getEttor() > 0){
+            if (Player[N].isDiscardEtt() == true){
+                btnEttor.setEnabled(false);
+                btnEttor.setText("0");
+            }else if(Player[N].getEttor() > 0){
                 btnEttor.setEnabled(false);
                 btnEttor.setText(Integer.toString(Player[N].getEttor()));
             }else if (Dice[i].getVarde() == 1){
                 btnEttor.setEnabled(true);
                 btnEttor.setText("0");
             }
-            
-            if(Player[N].getTvaor() > 0){
+
+            if (Player[N].isDiscardTva() == true){
+                btnTvaor.setEnabled(false);
+                btnTvaor.setText("0");
+            }else if(Player[N].getTvaor() > 0){
                 btnTvaor.setEnabled(false);
                 btnTvaor.setText(Integer.toString(Player[N].getTvaor()));
-            }else if(Dice[i].getVarde() == 2){
+            }else if (Dice[i].getVarde() == 2){
                 btnTvaor.setEnabled(true);
                 btnTvaor.setText("0");
             }
             
-            if(Player[N].getTreor() > 0){
+
+            if (Player[N].isDiscardTre() == true){
+                btnTreor.setEnabled(false);
+                btnTreor.setText("0");
+            }else if(Player[N].getTreor() > 0){
                 btnTreor.setEnabled(false);
                 btnTreor.setText(Integer.toString(Player[N].getTreor()));
-            }else if(Dice[i].getVarde() == 3){
+            }else if (Dice[i].getVarde() == 3){
                 btnTreor.setEnabled(true);
                 btnTreor.setText("0");
             }
             
-            if(Player[N].getFyror() > 0){
+            if (Player[N].isDiscardFyra() == true){
+                btnFyror.setEnabled(false);
+                btnFyror.setText("0");
+            }else if(Player[N].getFyror() > 0){
                 btnFyror.setEnabled(false);
                 btnFyror.setText(Integer.toString(Player[N].getFyror()));
-            }else if(Dice[i].getVarde() == 4){
+            }else if (Dice[i].getVarde() == 4){
                 btnFyror.setEnabled(true);
                 btnFyror.setText("0");
             }
             
-            if(Player[N].getFemmor() == 5){
+            if (Player[N].isDiscardFem() == true){
+                btnFemmor.setEnabled(false);
+                btnFemmor.setText("0");
+            }else if(Player[N].getFemmor() > 0){
                 btnFemmor.setEnabled(false);
                 btnFemmor.setText(Integer.toString(Player[N].getFemmor()));
-            }else if(Dice[i].getVarde() == 5){
+            }else if (Dice[i].getVarde() == 5){
                 btnFemmor.setEnabled(true);
                 btnFemmor.setText("0");
             }
             
-            if(Player[N].getSexor() == 6){
+            if (Player[N].isDiscardSex() == true){
+                btnSexor.setEnabled(false);
+                btnSexor.setText("0");
+            }else if(Player[N].getSexor() > 0){
                 btnSexor.setEnabled(false);
                 btnSexor.setText(Integer.toString(Player[N].getSexor()));
-            }else if(Dice[i].getVarde() == 6){
+            }else if (Dice[i].getVarde() == 6){
                 btnSexor.setEnabled(true);
                 btnSexor.setText("0");
             }
 
         }
-        
-        if(Player[N].getEttPar() > 0){
+        if (Player[N].isDiscardEttPar() == true){
+            btnEttPar.setEnabled(false);
+            btnEttPar.setText("0");
+        }else if(Player[N].getEttPar() > 0){
             btnEttPar.setEnabled(false);
             btnEttPar.setText(Integer.toString(Player[N].getEttPar()));
-        }else if(checkPar() == true){
+        }else if(checkPar() > 0){
             btnEttPar.setEnabled(true);
             btnEttPar.setText("0");
         }else{
             btnEttPar.setEnabled(false);
             btnEttPar.setText("0");
         }
-        if(Player[N].getTvaPar() > 0){
+        
+        if (Player[N].isDiscardTvaPar() == true){
+            btnTvaPar.setEnabled(false);
+            btnTvaPar.setText("0");
+        }else if(Player[N].getTvaPar() > 0){
             btnTvaPar.setEnabled(false);
             btnTvaPar.setText(Integer.toString(Player[N].getTvaPar()));
-        }else if (checkTvaPar() == true){
+        }else if (checkTvaPar() > 0){
             btnTvaPar.setEnabled(true);
             btnTvaPar.setText("0");
         }else{
             btnTvaPar.setEnabled(false);
             btnTvaPar.setText("0");
         }
-        if(Player[N].getTriss() > 0){
+        
+        if (Player[N].isDiscardTriss() == true){
+            btnTriss.setEnabled(false);
+            btnTriss.setText("0");
+        }else if(Player[N].getTriss() > 0){
             btnTriss.setEnabled(false);
             btnTriss.setText(Integer.toString(Player[N].getTriss()));
-        }else{
+        }else if (checkTriss() > 0){
             btnTriss.setEnabled(true);
             btnTriss.setText("0");
+        }else{
+            btnTriss.setEnabled(false);
+            btnTriss.setText("0");
         }
-        if(Player[N].getFyrtal() > 0){
+        
+        if (Player[N].isDiscardFyrtal() == true){
+            btnFyrtal.setEnabled(false);
+            btnFyrtal.setText("0");
+        }else if(Player[N].getFyrtal() > 0){
             btnFyrtal.setEnabled(false);
             btnFyrtal.setText(Integer.toString(Player[N].getFyrtal()));
-        }else{
+        }else if (checkFyrtal() > 0){
             btnFyrtal.setEnabled(true);
             btnFyrtal.setText("0");
+        }else{
+            btnFyrtal.setEnabled(false);
+            btnFyrtal.setText("0");
         }
-        if(Player[N].getLitenStege() > 0){
+        
+        if (Player[N].isDiscardLStege() == true){
+            btnLitenStege.setEnabled(false);
+            btnLitenStege.setText("0");
+        }else if(Player[N].getLitenStege() > 0){
             btnLitenStege.setEnabled(false);
             btnLitenStege.setText(Integer.toString(Player[N].getLitenStege()));
-        }else{
+        }else if (checkLStege() > 0){
             btnLitenStege.setEnabled(true);
             btnLitenStege.setText("0");
+        }else{
+            btnLitenStege.setEnabled(false);
+            btnLitenStege.setText("0");
         }
-        if(Player[N].getStorStege() > 0){
+        
+        if (Player[N].isDiscardSStege() == true){
+            btnStorStege.setEnabled(false);
+            btnStorStege.setText("0");
+        }else if(Player[N].getStorStege() > 0){
             btnStorStege.setEnabled(false);
             btnStorStege.setText(Integer.toString(Player[N].getStorStege()));
-        }else{
+        }else if (checkSStege() > 0){
             btnStorStege.setEnabled(true);
             btnStorStege.setText("0");
+        }else{
+            btnStorStege.setEnabled(false);
+            btnStorStege.setText("0");
         }
-        if(Player[N].getKak() > 0){
+        
+        if (Player[N].isDiscardKak() == true){
+            btnKak.setEnabled(false);
+            btnKak.setText("0");
+        }else if(Player[N].getKak() > 0){
             btnKak.setEnabled(false);
             btnKak.setText(Integer.toString(Player[N].getKak()));
-        }else{
+        }else if (checkKak() > 0){
             btnKak.setEnabled(true);
             btnKak.setText("0");
+        }else{
+            btnKak.setEnabled(false);
+            btnKak.setText("0");
         }
-        if(Player[N].getChans() > 0){
+        
+        if (Player[N].isDiscardChans() == true){
+            btnChans.setEnabled(false);
+            btnChans.setText("0");
+        }else if(Player[N].getChans() > 0){
             btnChans.setEnabled(false);
             btnChans.setText(Integer.toString(Player[N].getChans()));
         }else{
             btnChans.setEnabled(true);
             btnChans.setText("0");
         }
-        if(Player[N].getYatzy() > 0){
+        
+        if (Player[N].isDiscardYatzy() == true){
+            btnYatzy.setEnabled(false);
+            btnYatzy.setText("0");
+        }else if(Player[N].getYatzy() > 0){
             btnYatzy.setEnabled(false);
             btnYatzy.setText(Integer.toString(Player[N].getYatzy()));
-        }else{
+        }else if (checkYatzy() > 0){
             btnYatzy.setEnabled(true);
+            btnYatzy.setText("0");
+        }else{
+            btnYatzy.setEnabled(false);
             btnYatzy.setText("0");
         }
         
@@ -776,146 +1081,423 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     
     }
     
-    private void btnRullaTarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRullaTarnActionPerformed
-        
+    private void btnRullaTarn(){
         if(reRoll == 0){ 
             
-            prevN = N;
+            if(discard && firstRound){
+                
+                JOptionPane.showMessageDialog(null, "Please Discard a Field ", "Discard!",
+                    JOptionPane.INFORMATION_MESSAGE);
+                setTrue();
+                discardDice = true;
+             
             
-            if (N < numPlayers){
-                N = N + 1;  
-            }else if (N >= numPlayers){
-                N = 0;
-            }
+            }else{
+                firstRound = true;
+                prevN = N;
+
+                if (N < numPlayers){
+                    N++; 
+                }else if (N >= numPlayers){
+                    N = 0;
+                    gameRound++;
+                    lblTurn.setText("Turn " + gameRound);
+                }
+
+                if(gameRound >= 16){
+                    new Score_JFrame().setVisible(true);
+                }
+
+
+                for (int i = 0; i <= 4 ; i++){
+                    if(Dice[i].getReroll() == false){
+                        Dice[i].setReroll();
+                    }
+                }
             
-            if(prevN != N){
-                boxRe.setSelected(false);
-                boxRe1.setSelected(false);
-                boxRe2.setSelected(false);
-                boxRe3.setSelected(false);
-                boxRe4.setSelected(false);
-            }
-            
-            setFalse();
-            updateScore();
+                setFalse();
+                updateScore();
 
             
-            for (int i= 0; i<=4 ; i++){
-                Dice[i].setVarde();
+                for (int i= 0; i<=4 ; i++){
+                    Dice[i].setVarde();
+                
+                }
+                checkDice();
+            
+                reRoll = 2;
+                lblPlayerName.setText(Player[N].getNamn()+" | 2 Rerolls left");
+                
+                
             }
             
-            checkDice();
-            
-            reRoll = 3;
-            lblPlayerName.setText(Player[N].getNamn()+" | 3 Rerolls left");
+
     
         }else if(reRoll>0){
             
-            
-            if(boxRe.isSelected()){
-                Dice[0].setVarde();
-            }
-            if(boxRe1.isSelected()){
-                Dice[1].setVarde();
-            }
-            if(boxRe2.isSelected()){
-                Dice[2].setVarde();
-            }
-            if(boxRe3.isSelected()){
-                Dice[3].setVarde();
-            }
-            if(boxRe4.isSelected()){
-                Dice[4].setVarde();
+            for (int i = 0 ; i <= 4; i++){
+                if(Dice[i].getReroll()){
+                    Dice[i].setVarde();
+                }
             }
             
             setFalse();
             checkDice();
             
             reRoll -= 1;
+            if(reRoll ==  0){
+                
+            }
             lblPlayerName.setText( Player[N].getNamn() +" | 0 Rerolls left");
-        }
-        if(reRoll == 2){
-            
-            lblPlayerName.setText( Player[N].getNamn() +" | 2 Rerolls left");
-        
-        }if(reRoll == 1){
+        }        
+        if(reRoll == 1){
            
             lblPlayerName.setText( Player[N].getNamn() +" | 1 Rerolls left");
         
         }
         repaint();
+        discard = true;
+    }
+    
+    private void btnRullaTarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRullaTarnActionPerformed
+    btnRullaTarn();
     }//GEN-LAST:event_btnRullaTarnActionPerformed
 
     private void btnEttParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEttParActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardEttPar(true);
+            updateScore();
+            setFalse();
+            discard = false;                
+            discardDice = false;
+        }else{
+            int varde = checkPar();
+            Player[N].setEttPar(varde * 2);
+            btnEttPar.setText(Integer.toString(Player[N].getEttPar()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnEttParActionPerformed
 
     private void btnTvaParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTvaParActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardTvaPar(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+            int varde = checkTvaPar();
+            Player[N].setTvaPar(varde * 2);
+            btnTvaPar.setText(Integer.toString(Player[N].getTvaPar()));
+
+            updateScore();
+            setFalse();
+
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnTvaParActionPerformed
 
     private void btnTrissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrissActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardTriss(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+            int varde = checkTriss();
+            Player[N].setTriss(varde * 3);
+            btnTriss.setText(Integer.toString(Player[N].getTriss()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnTrissActionPerformed
 
     private void btnFyrtalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyrtalActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardFyrtal(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+            int varde = checkFyrtal();
+            Player[N].setFyrtal(varde * 4);
+            btnFyrtal.setText(Integer.toString(Player[N].getFyrtal()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnFyrtalActionPerformed
 
-    private void btnStorStegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStorStegeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnStorStegeActionPerformed
-
     private void btnLitenStegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLitenStegeActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardLStege(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+            Player[N].setStorStege(15);
+            btnLitenStege.setText(Integer.toString(Player[N].getStorStege()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnLitenStegeActionPerformed
 
+    private void btnStorStegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStorStegeActionPerformed
+        if(discardDice){
+            Player[N].setDiscardSStege(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+            Player[N].setLitenStege(20);
+            btnStorStege.setText(Integer.toString(Player[N].getLitenStege()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
+    }//GEN-LAST:event_btnStorStegeActionPerformed
+
     private void btnKakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKakActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+        Player[N].setDiscardKak(true);
+        updateScore();
+        setFalse();
+        discard = false;
+        discardDice = false;
+        }else{
+        Player[N].setKak(checkKak());
+        btnKak.setText(Integer.toString(Player[N].getKak()));
+        updateScore();
+        setFalse();
+        reRoll = 0;
+        discard = false;
+        }
+
     }//GEN-LAST:event_btnKakActionPerformed
 
     private void btnChansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChansActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardChans(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            int varde = 0;
+
+            for(int i = 0; i <= 4; i++){
+                varde += Dice[i].getVarde(); 
+            }
+
+            Player[N].setChans(varde);
+            btnChans.setText(Integer.toString(Player[N].getChans()));
+            updateScore();
+            setFalse();
+            reRoll = 0; 
+            discard = false;
+        }
+
+
     }//GEN-LAST:event_btnChansActionPerformed
 
     private void btnYatzyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYatzyActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardYatzy(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            Player[N].setYatzy(checkYatzy() * 5);
+            btnYatzy.setText(Integer.toString(Player[N].getYatzy()));
+            updateScore();
+            setFalse();
+            reRoll = 0; 
+            discard = false;
+        }
+
     }//GEN-LAST:event_btnYatzyActionPerformed
 
     private void btnEttorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEttorActionPerformed
-        for (int i = 0; i <=4; i++){
-            if(Dice[i].getVarde() == 1){
-              Player[N].setEttor(Player[N].getEttor() + 1);
-              btnEttor.setEnabled(false);
+        if(discardDice){
+            Player[N].setDiscardEtt(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 1){
+                  Player[N].setEttor(Player[N].getEttor() + 1);
+                  btnEttor.setEnabled(false);
+                }
             }
+            btnEttor.setText(Integer.toString(Player[N].getEttor()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
         }
-        btnEttor.setText(Integer.toString(Player[N].getEttor()));
-        updateScore();
+
     }//GEN-LAST:event_btnEttorActionPerformed
 
     private void btnTvaorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTvaorActionPerformed
-        // TODO add your handling code here:
+        if(discardDice){
+            Player[N].setDiscardTva(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 2){
+                  Player[N].setTvaor(Player[N].getTvaor() + 2);
+                }
+            }
+            checkDice();
+            btnTvaor.setText(Integer.toString(Player[N].getTvaor()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
+        
     }//GEN-LAST:event_btnTvaorActionPerformed
 
     private void btnTreorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTreorActionPerformed
-        // TODO add your handling code here:
+        
+         if(discardDice){
+            Player[N].setDiscardTre(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 3){
+                  Player[N].setTreor(Player[N].getTreor() + 3);
+                }
+            }
+            checkDice();
+            btnTreor.setText(Integer.toString(Player[N].getTreor()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
+         
     }//GEN-LAST:event_btnTreorActionPerformed
 
     private void btnFyrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyrorActionPerformed
-        // TODO add your handling code here:
+         if(discardDice){
+            Player[N].setDiscardFyra(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 4){
+                  Player[N].setFyror(Player[N].getFyror() + 4);
+                }
+            }
+            checkDice();
+            btnFyror.setText(Integer.toString(Player[N].getFyror()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnFyrorActionPerformed
 
     private void btnFemmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemmorActionPerformed
-        // TODO add your handling code here:
+         if(discardDice){
+            Player[N].setDiscardFem(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+         }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 5){
+                  Player[N].setFemmor(Player[N].getFemmor() + 5);
+                }
+            }
+            checkDice();
+            btnFemmor.setText(Integer.toString(Player[N].getFemmor()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
+        
     }//GEN-LAST:event_btnFemmorActionPerformed
 
     private void btnSexorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSexorActionPerformed
-        // TODO add your handling code here:
+        
+         if(discardDice){
+            Player[N].setDiscardSex(true);
+            updateScore();
+            setFalse();
+            discard = false;
+            discardDice = false;
+        }else{
+        
+            for (int i = 0; i <=4; i++){
+                if(Dice[i].getVarde() == 6){
+                  Player[N].setSexor(Player[N].getSexor() + 6);
+                }
+            }
+            checkDice();
+            btnSexor.setText(Integer.toString(Player[N].getSexor()));
+            updateScore();
+            setFalse();
+            reRoll = 0;
+            discard = false;
+        }
     }//GEN-LAST:event_btnSexorActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
     }//GEN-LAST:event_formComponentShown
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(evt.getY() > 18 && evt.getY() < 104){
+            for (int i = 0; i <= 4; i++){
+                if(evt.getX() > Dice[i].getX() && evt.getX() < (Dice[i].getX() + 86)){
+                    Dice[i].setReroll();
+                }
+            }
+        }
+        repaint();
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == 32 || evt.getKeyCode() == 13){
+            btnRullaTarn();
+        }
+    }//GEN-LAST:event_formKeyPressed
     
     public void paintComponent(Graphics g)
     {   
@@ -923,31 +1505,31 @@ public class gamePage_JPanel extends javax.swing.JPanel {
         
             for (int i= 0; i<=4 ; i++){
                 int x = Dice[i].getX();
+                if(Dice[i].getReroll()){
+                    g.setColor(Color.darkGray);
+                    g.fillRect(x, 18, 86, 86);
+                }else{
+                    g.setColor(Color.red);
+                    g.fillRect(x, 18, 86, 86);
+                }
+                
                 switch (Dice[i].getVarde()) {
                     case 1:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x, 18, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+30, 48, 26, 26);
                         break;
                     case 2:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x, 18, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+1, 19, 26, 26);
                         g.fillOval(x+59, 77, 26, 26);
                         break;
                     case 3:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x, 18, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+1, 19, 26, 26);
                         g.fillOval(x+30, 48, 26, 26);
                         g.fillOval(x+59, 77, 26, 26);
                         break;
                     case 4:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x, 18, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+1, 19, 26, 26);
                         g.fillOval(x+59, 19, 26, 26);
@@ -955,8 +1537,6 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                         g.fillOval(x+1, 77, 26, 26);
                         break;
                     case 5:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x+1, 19, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+1, 19, 26, 26);
                         g.fillOval(x+59, 19, 26, 26);
@@ -965,8 +1545,6 @@ public class gamePage_JPanel extends javax.swing.JPanel {
                         g.fillOval(x+1, 77, 26, 26);
                         break;
                     case 6:
-                        g.setColor(Color.darkGray);
-                        g.fillRect(x, 18, 86, 86);
                         g.setColor(Color.white);
                         g.fillOval(x+1, 19, 26, 26);
                         g.fillOval(x+59, 19, 26, 26);
@@ -980,11 +1558,6 @@ public class gamePage_JPanel extends javax.swing.JPanel {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox boxRe;
-    private javax.swing.JCheckBox boxRe1;
-    private javax.swing.JCheckBox boxRe2;
-    private javax.swing.JCheckBox boxRe3;
-    private javax.swing.JCheckBox boxRe4;
     private javax.swing.JButton btnChans;
     private javax.swing.JButton btnEttPar;
     private javax.swing.JButton btnEttor;
@@ -1017,6 +1590,7 @@ public class gamePage_JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblSumma;
     private javax.swing.JLabel lblTreor;
     private javax.swing.JLabel lblTriss;
+    private javax.swing.JLabel lblTurn;
     private javax.swing.JLabel lblTvaPar;
     private javax.swing.JLabel lblTvaor;
     private javax.swing.JLabel lblYatzy;

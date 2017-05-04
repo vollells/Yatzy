@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class mainPage_JFrame extends javax.swing.JFrame {
     
-    infoShare main = new infoShare();
+
     public int numPlayers = 0;
     public String playerName[]  = new String[4];
     
@@ -42,6 +42,11 @@ public class mainPage_JFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         lblWelcome.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         lblWelcome.setText("Welcome to YATZY!");
@@ -49,18 +54,50 @@ public class mainPage_JFrame extends javax.swing.JFrame {
         txfPlayer3.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         txfPlayer3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPlayer3.setText("Player 3");
+        txfPlayer3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfPlayer3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txfPlayer3FocusLost(evt);
+            }
+        });
 
         txfPlayer4.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         txfPlayer4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPlayer4.setText("Player 4");
+        txfPlayer4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfPlayer4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txfPlayer4FocusLost(evt);
+            }
+        });
 
         txfPlayer1.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         txfPlayer1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPlayer1.setText("Player 1");
+        txfPlayer1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfPlayer1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txfPlayer1FocusLost(evt);
+            }
+        });
 
         txfPlayer2.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         txfPlayer2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPlayer2.setText("Player 2");
+        txfPlayer2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfPlayer2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txfPlayer2FocusLost(evt);
+            }
+        });
 
         btnStart.setFont(new java.awt.Font("Trattatello", 0, 24)); // NOI18N
         btnStart.setText("START!");
@@ -122,15 +159,15 @@ public class mainPage_JFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        
+    
+    private void btnStart(){
+            
         if(txfPlayer1.getText().equals("Player 1")){
             
             JOptionPane.showMessageDialog(null, "Please enter atleast one name "
                     , "No Name",JOptionPane.ERROR_MESSAGE);
             
-        }else if (txfPlayer1.getText().length() > 7){
+        }else if (txfPlayer1.getText().length() > 8){
             
             JOptionPane.showMessageDialog(null, "Your name is too long!"
                     , "Long Name",JOptionPane.ERROR_MESSAGE);
@@ -166,9 +203,60 @@ public class mainPage_JFrame extends javax.swing.JFrame {
             gamePage_JPanel.playerName[3] = txfPlayer4.getText();
             
             new yatzy_JFrame().setVisible(true);
+            new mainPage_JFrame().setVisible(false);
         }
-
+        setVisible(false);
+    
+    }
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        btnStart();
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void txfPlayer1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer1FocusGained
+    txfPlayer1.setText("");
+    }//GEN-LAST:event_txfPlayer1FocusGained
+
+    private void txfPlayer1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer1FocusLost
+        if(txfPlayer1.getText().equals("")){
+            txfPlayer1.setText("Player 1");
+        }
+    }//GEN-LAST:event_txfPlayer1FocusLost
+
+    private void txfPlayer2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer2FocusGained
+    txfPlayer2.setText("");
+    }//GEN-LAST:event_txfPlayer2FocusGained
+
+    private void txfPlayer2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer2FocusLost
+        if(txfPlayer2.getText().equals("")){
+            txfPlayer2.setText("Player 2");
+        }
+    }//GEN-LAST:event_txfPlayer2FocusLost
+
+    private void txfPlayer3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer3FocusGained
+    txfPlayer3.setText("");
+    }//GEN-LAST:event_txfPlayer3FocusGained
+
+    private void txfPlayer3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer3FocusLost
+        if(txfPlayer3.getText().equals("")){
+            txfPlayer3.setText("Player 3");
+        }
+    }//GEN-LAST:event_txfPlayer3FocusLost
+
+    private void txfPlayer4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusGained
+    txfPlayer4.setText("");
+    }//GEN-LAST:event_txfPlayer4FocusGained
+
+    private void txfPlayer4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusLost
+        if(txfPlayer4.getText().equals("")){
+            txfPlayer4.setText("Player 4");
+        }
+    }//GEN-LAST:event_txfPlayer4FocusLost
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == 34){
+            btnStart();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments

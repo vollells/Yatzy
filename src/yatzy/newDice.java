@@ -14,7 +14,7 @@ package yatzy;
 public class newDice {
     private int varde;
     private int x;
-    
+    private boolean reRoll = true;
 
     public newDice(int y) {
         x = y;
@@ -31,6 +31,18 @@ public class newDice {
 
     public void setVarde() {
         varde = (int)(Math.random()*6)+1;
+    }
+    
+    public void setDebug(int varde ){
+        this.varde = varde;
+    }
+    
+    public void setReroll(){
+        reRoll = !reRoll;
+    }
+    
+    public boolean getReroll(){
+        return reRoll;
     }
     
 

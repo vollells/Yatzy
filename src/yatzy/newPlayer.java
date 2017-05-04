@@ -28,6 +28,153 @@ public class newPlayer {
     private int chans;
     private int yatzy;
     private int total;
+    private boolean[] discard = new boolean[16];
+    private boolean discardEtt = false;
+    private boolean discardTva = false;
+    private boolean discardTre = false;
+    private boolean discardFyra = false;
+    private boolean discardFem = false;
+    private boolean discardSex = false;
+    private boolean discardEttPar = false;
+    private boolean discardTvaPar = false;
+    private boolean discardTriss = false;
+    private boolean discardFyrtal = false;
+    private boolean discardLStege = false;
+    private boolean discardSStege = false;
+    private boolean discardKak = false;
+    private boolean discardChans = false;
+    private boolean discardYatzy = false;
+    
+    
+    
+    public void setDiscard(boolean[] discard) {
+        this.discard = discard;
+    }
+
+    public boolean[] getDiscard() {
+        return discard;
+    }
+
+    public void setDiscardEtt(boolean discardEtt) {
+        this.discardEtt = discardEtt;
+    }
+
+    public void setDiscardTva(boolean discardTva) {
+        this.discardTva = discardTva;
+    }
+
+    public void setDiscardTre(boolean discardTre) {
+        this.discardTre = discardTre;
+    }
+
+    public void setDiscardFyra(boolean discardFyra) {
+        this.discardFyra = discardFyra;
+    }
+
+    public void setDiscardFem(boolean discardFem) {
+        this.discardFem = discardFem;
+    }
+
+    public void setDiscardSex(boolean discardSex) {
+        this.discardSex = discardSex;
+    }
+
+    public void setDiscardEttPar(boolean discardEttPar) {
+        this.discardEttPar = discardEttPar;
+    }
+
+    public void setDiscardTvaPar(boolean discardTvaPar) {
+        this.discardTvaPar = discardTvaPar;
+    }
+
+    public void setDiscardTriss(boolean discardTriss) {
+        this.discardTriss = discardTriss;
+    }
+
+    public void setDiscardFyrtal(boolean discardFyrtal) {
+        this.discardFyrtal = discardFyrtal;
+    }
+
+    public void setDiscardLStege(boolean discardLStege) {
+        this.discardLStege = discardLStege;
+    }
+
+    public void setDiscardSStege(boolean discardSStege) {
+        this.discardSStege = discardSStege;
+    }
+
+    public void setDiscardKak(boolean discardKak) {
+        this.discardKak = discardKak;
+    }
+
+    public void setDiscardChans(boolean discardChans) {
+        this.discardChans = discardChans;
+    }
+
+    public void setDiscardYatzy(boolean discardYatzy) {
+        this.discardYatzy = discardYatzy;
+    }
+
+    public boolean isDiscardEtt() {
+        return discardEtt;
+    }
+
+    public boolean isDiscardTva() {
+        return discardTva;
+    }
+
+    public boolean isDiscardTre() {
+        return discardTre;
+    }
+
+    public boolean isDiscardFyra() {
+        return discardFyra;
+    }
+
+    public boolean isDiscardFem() {
+        return discardFem;
+    }
+
+    public boolean isDiscardSex() {
+        return discardSex;
+    }
+
+    public boolean isDiscardEttPar() {
+        return discardEttPar;
+    }
+
+    public boolean isDiscardTvaPar() {
+        return discardTvaPar;
+    }
+
+    public boolean isDiscardTriss() {
+        return discardTriss;
+    }
+
+    public boolean isDiscardFyrtal() {
+        return discardFyrtal;
+    }
+
+    public boolean isDiscardLStege() {
+        return discardLStege;
+    }
+
+    public boolean isDiscardSStege() {
+        return discardSStege;
+    }
+
+    public boolean isDiscardKak() {
+        return discardKak;
+    }
+
+    public boolean isDiscardChans() {
+        return discardChans;
+    }
+
+    public boolean isDiscardYatzy() {
+        return discardYatzy;
+    }
+
 
     public newPlayer(String namn) {
         this.namn = namn;
