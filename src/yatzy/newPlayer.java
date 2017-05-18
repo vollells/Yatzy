@@ -6,12 +6,14 @@
 package yatzy;
 
 /**
- *
+ * Class som är ett object för dice!
  * @author victorlells
  */
 public class newPlayer {
     
+    //Medlemsvariabler  
     private String namn;
+    private int finalScore;
     private int ettor;
     private int tvaor;
     private int treor;
@@ -44,9 +46,17 @@ public class newPlayer {
     private boolean discardKak = false;
     private boolean discardChans = false;
     private boolean discardYatzy = false;
+
     
     
-    
+    public int getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
+    }
+
     public void setDiscard(boolean[] discard) {
         this.discard = discard;
     }

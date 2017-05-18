@@ -13,10 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class mainPage_JFrame extends javax.swing.JFrame {
     
-
-    public int numPlayers = 0;
-    public String playerName[]  = new String[4];
-    
     /**
      * Creates new form mainPage_JFrame
      */
@@ -173,37 +169,36 @@ public class mainPage_JFrame extends javax.swing.JFrame {
                     , "Long Name",JOptionPane.ERROR_MESSAGE);
         }else if(txfPlayer2.getText().equals("Player 2")){
             
-            gamePage_JPanel.numPlayers = 0;
-            gamePage_JPanel.playerName[0] = txfPlayer1.getText();
+            yatzy_JFrame.numPlayers = 0;
+            yatzy_JFrame.playerName[0] = txfPlayer1.getText();
             
             new yatzy_JFrame().setVisible(true);
             
         }else if(txfPlayer3.getText().equals("Player 3")){
            
-            gamePage_JPanel.numPlayers = 1;
-            gamePage_JPanel.playerName[0] = txfPlayer1.getText();
-            gamePage_JPanel.playerName[1] = txfPlayer2.getText();
+            yatzy_JFrame.numPlayers = 1;
+            yatzy_JFrame.playerName[0] = txfPlayer1.getText();
+            yatzy_JFrame.playerName[1] = txfPlayer2.getText();
             
             new yatzy_JFrame().setVisible(true);
             
         }else if(txfPlayer4.getText().equals("Player 4")){
             
-            gamePage_JPanel.numPlayers = 2;
-            gamePage_JPanel.playerName[0] = txfPlayer1.getText();
-            gamePage_JPanel.playerName[1] = txfPlayer2.getText();
-            gamePage_JPanel.playerName[2] = txfPlayer2.getText();
+            yatzy_JFrame.numPlayers = 2;
+            yatzy_JFrame.playerName[0] = txfPlayer1.getText();
+            yatzy_JFrame.playerName[1] = txfPlayer2.getText();
+            yatzy_JFrame.playerName[2] = txfPlayer3.getText();
             
             new yatzy_JFrame().setVisible(true);
         }else{
             
-            gamePage_JPanel.numPlayers = 3;
-            gamePage_JPanel.playerName[0] = txfPlayer1.getText();
-            gamePage_JPanel.playerName[1] = txfPlayer2.getText();
-            gamePage_JPanel.playerName[2] = txfPlayer3.getText();
-            gamePage_JPanel.playerName[3] = txfPlayer4.getText();
+            yatzy_JFrame.numPlayers = 3;
+            yatzy_JFrame.playerName[0] = txfPlayer1.getText();
+            yatzy_JFrame.playerName[1] = txfPlayer2.getText();
+            yatzy_JFrame.playerName[2] = txfPlayer3.getText();
+            yatzy_JFrame.playerName[3] = txfPlayer4.getText();
             
             new yatzy_JFrame().setVisible(true);
-            new mainPage_JFrame().setVisible(false);
         }
         setVisible(false);
     
@@ -243,7 +238,7 @@ public class mainPage_JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txfPlayer3FocusLost
 
     private void txfPlayer4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusGained
-    txfPlayer4.setText("");
+        txfPlayer4.setText("");
     }//GEN-LAST:event_txfPlayer4FocusGained
 
     private void txfPlayer4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusLost
