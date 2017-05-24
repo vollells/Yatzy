@@ -7,14 +7,15 @@ package yatzy;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import yatzy.yatzy_JFrame;
+
 
 /**
- *
+ * Klass som hanterar ritandet av tärningarna 
  * @author victorlells
  */
 public class dices_JPanel extends javax.swing.JPanel {
     
+    //  Skapar ett Objekt för dice
     newDice Dice[] = {new newDice(2),new newDice(90),new newDice(359),new newDice(455),new newDice(551)};
     
     /**
@@ -45,11 +46,19 @@ public class dices_JPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-public void paintshit(){
-    repaint();
-}
+    /**
+     * Metod som ritar
+     */
+    public void paintshit(){
+        repaint();
+    }
 
-public void paintComponent(Graphics g)
+    /**
+    * METOD SOM RITAR
+    * @param g Graphics
+    */
+    @Override
+    public void paintComponent(Graphics g)
     {   
         super.paintComponent(g);
         

@@ -6,17 +6,14 @@
 package yatzy;
 
 import javax.swing.JOptionPane;
-import java.util.Arrays;
-
-
 
 /**
- *
+ * klass som är yatzy
  * @author victorlells
  */
 public class yatzy_JFrame extends javax.swing.JFrame {
 
-    
+    //medelemsvariabler
     private int N = 4;
     private int prevN;
     private int reRoll = 0;
@@ -27,6 +24,8 @@ public class yatzy_JFrame extends javax.swing.JFrame {
     private boolean discardDice = false;
     private boolean firstRound = false;
     
+    
+    //Objekt
     dices_JPanel paint = new dices_JPanel();
     
     static newDice Dice[] = {new newDice(8),new newDice(102),new newDice(196),new newDice(290),new newDice(384)};
@@ -92,7 +91,6 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         btnRullaTarn = new javax.swing.JButton();
         lblYatzy = new javax.swing.JLabel();
         dices_JPanel1 = new yatzy.dices_JPanel();
-        btnDebug = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -338,13 +336,6 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        btnDebug.setText("jButton1");
-        btnDebug.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDebugActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -441,10 +432,6 @@ public class yatzy_JFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dices_JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDebug)
-                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,14 +526,18 @@ public class yatzy_JFrame extends javax.swing.JFrame {
                         .addComponent(txfPoang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPoang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRullaTarn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(btnDebug)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
+    /**
+     * Metod som kontrollerar ifall det finns ett eller två Par och ifall det 
+     * finns två returnerar den paret med det största värdet
+     * @return trueOrFalse värdet för en av tärningarna i paret
+     */
      private int checkPar (){
         
         int trueOrFalse = 0; 
@@ -595,6 +586,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+     /**
+      * METOD som kontrollerar ifall det finns två Par 
+      * @return trueOrFalse värdet av en tärning i båda paren
+      */
     private int checkTvaPar (){
         int trueOrFalse = 0; 
         boolean diceV1 = false;
@@ -633,6 +628,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för triss
+     * @return trueOrFalse värdet av en tärningn i triss
+     */
     private int checkTriss (){
         int trueOrFalse = 0; 
         
@@ -652,6 +651,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för Fyrtal
+     * @return trueOrFalse värdet för en av tärningarna i fyrtalet
+     */
     private int checkFyrtal (){
         int trueOrFalse = 0; 
         
@@ -674,6 +677,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för Liten Stege
+     * @return trueOrFalse värdet för Liten Stege
+     */
     private int checkLStege (){
         int trueOrFalse = 0; 
         
@@ -704,6 +711,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för Stor Stege
+     * @return trueOrFalse värdet för StorStege
+     */
     private int checkSStege (){
         int trueOrFalse = 0; 
 
@@ -734,6 +745,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för Kåk
+     * @return trueOrFalse värdet för en av tärningarna i trissen och paret för kåk
+     */
     private int checkKak (){
         
         boolean trueOrFalse1 = false; 
@@ -778,6 +793,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         return trueOrFalse3;
     }
     
+    /**
+     * METOD som kontrollerar ifall det finns möjligheten för Yatzy
+     * @return trueOrFalse värdet för en av tärningarna i Yatzy
+     */
     private int checkYatzy(){
         int trueOrFalse = 0;
             
@@ -791,7 +810,9 @@ public class yatzy_JFrame extends javax.swing.JFrame {
     
     
     
-    
+   /**
+    * Metod som sätter alla btn till true ifall vissa konditions är uppfyllda
+    */ 
     private void setTrue(){
         if(Player[N].isDiscardEtt() == false && Player[N].getEttor() == 0 ){
             btnEttor.setEnabled(true);
@@ -871,6 +892,9 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * METOD som Sätter alla btn till FALSE 
+     */
     private void setFalse(){
         
             btnEttor.setEnabled(false);
@@ -891,6 +915,9 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             
     }
     
+    /**
+     * METOD som updaterar alla text-fields
+     */
     private void updateScore(){
         
         txfSumma.setText(Integer.toString(Player[N].getEttor()+ Player[N].getTvaor()+  
@@ -910,6 +937,10 @@ public class yatzy_JFrame extends javax.swing.JFrame {
     
     }
     
+    /**
+     * METOD som kontrollerar ifall en knapp ska vara 
+     * Enabled beronde på olika varibler
+     */
     private void checkDice(){
         for (int i = 0; i <= 4; i++){
             
@@ -1108,7 +1139,14 @@ public class yatzy_JFrame extends javax.swing.JFrame {
     
     }
     
+    /**
+     * Metpd som kontrollerar flödet av spelet och flera andra diverse saker
+     */
     private void btnRullaTarn(){
+        /**
+         * Ifall reRoll har olika värden kan antingen rundan öka eller 
+         * vilken spelare som är aktiv 
+         */
         if(reRoll == 0){ 
             
             if(discard && firstRound){
@@ -1172,7 +1210,9 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             }
             
 
-    
+        /**
+         * Ifall reRoll är större än 0 borde den reRolla alla tärningar som har inte har vlats
+         */
         }else if(reRoll>0){
             
             for (int i = 0 ; i <= 4; i++){
@@ -1199,6 +1239,9 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         discard = true;
     }
     
+    /**
+     * Metod som räknar ut hur många poäng en spelare har i slutet av spelet
+     */
     private void calcScore(){
         
         
@@ -1216,6 +1259,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
     
     }
     
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnEttParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEttParActionPerformed
         if(discardDice){
             Player[N].setDiscardEttPar(true);
@@ -1233,7 +1281,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnEttParActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnTvaParActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTvaParActionPerformed
         if(discardDice){
             Player[N].setDiscardTvaPar(true);
@@ -1253,7 +1305,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnTvaParActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnTrissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrissActionPerformed
         if(discardDice){
             Player[N].setDiscardTriss(true);
@@ -1271,7 +1327,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnTrissActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnFyrtalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyrtalActionPerformed
         if(discardDice){
             Player[N].setDiscardFyrtal(true);
@@ -1289,7 +1349,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnFyrtalActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnStorStegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStorStegeActionPerformed
         if(discardDice){
             Player[N].setDiscardSStege(true);
@@ -1306,7 +1370,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnStorStegeActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnLitenStegeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLitenStegeActionPerformed
         if(discardDice){
             Player[N].setDiscardLStege(true);
@@ -1323,7 +1391,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnLitenStegeActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnKakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKakActionPerformed
         if(discardDice){
             Player[N].setDiscardKak(true);
@@ -1340,7 +1412,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnKakActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnChansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChansActionPerformed
         if(discardDice){
             Player[N].setDiscardChans(true);
@@ -1365,7 +1441,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnChansActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnYatzyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYatzyActionPerformed
         if(discardDice){
             Player[N].setDiscardYatzy(true);
@@ -1383,7 +1463,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnYatzyActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnEttorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEttorActionPerformed
         if(discardDice){
             Player[N].setDiscardEtt(true);
@@ -1406,7 +1490,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnEttorActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnTvaorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTvaorActionPerformed
         if(discardDice){
             Player[N].setDiscardTva(true);
@@ -1430,7 +1518,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnTvaorActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnTreorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTreorActionPerformed
 
         if(discardDice){
@@ -1455,7 +1547,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnTreorActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnFyrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyrorActionPerformed
         if(discardDice){
             Player[N].setDiscardFyra(true);
@@ -1478,7 +1574,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnFyrorActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnFemmorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemmorActionPerformed
         if(discardDice){
             Player[N].setDiscardFem(true);
@@ -1502,7 +1602,11 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnFemmorActionPerformed
-
+    /**
+     * Metod som använder olika varibler och metoder för att 
+     * avagöra hur många poäng du ska få ifall du klickar på knappen
+     * @param evt 
+     */
     private void btnSexorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSexorActionPerformed
 
         if(discardDice){
@@ -1526,11 +1630,17 @@ public class yatzy_JFrame extends javax.swing.JFrame {
             discard = false;
         }
     }//GEN-LAST:event_btnSexorActionPerformed
-
+    /**
+     * Metod som leder till btnRullaTarn
+     * @param evt 
+     */
     private void btnRullaTarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRullaTarnActionPerformed
         btnRullaTarn();
     }//GEN-LAST:event_btnRullaTarnActionPerformed
-
+    /**
+     * Metod som kontrollerar ifall du klickar på tärningarna
+     * @param evt 
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(evt.getY() > 40 && evt.getY() < 126){
             for (int i = 0; i <= 4; i++){
@@ -1541,16 +1651,15 @@ public class yatzy_JFrame extends javax.swing.JFrame {
         }
         repaint();
     }//GEN-LAST:event_formMouseClicked
-
+    /**
+     * Metod som kontrollerar ifall du trycker på space eller enter
+     * @param evt 
+     */
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if(evt.getKeyCode() == 32 || evt.getKeyCode() == 13){
             btnRullaTarn();
         }
     }//GEN-LAST:event_formKeyPressed
-
-    private void btnDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDebugActionPerformed
-        gameRound = 14;
-    }//GEN-LAST:event_btnDebugActionPerformed
     
 
     
@@ -1592,7 +1701,6 @@ public class yatzy_JFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChans;
-    private javax.swing.JButton btnDebug;
     private javax.swing.JButton btnEttPar;
     private javax.swing.JButton btnEttor;
     private javax.swing.JButton btnFemmor;

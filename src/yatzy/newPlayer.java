@@ -6,7 +6,7 @@
 package yatzy;
 
 /**
- * Class som är ett object för dice!
+ * Klass som är ett object för Players!
  * @author victorlells
  */
 public class newPlayer {
@@ -30,7 +30,6 @@ public class newPlayer {
     private int chans;
     private int yatzy;
     private int total;
-    private boolean[] discard = new boolean[16];
     private boolean discardEtt = false;
     private boolean discardTva = false;
     private boolean discardTre = false;
@@ -48,21 +47,17 @@ public class newPlayer {
     private boolean discardYatzy = false;
 
     
-    
-    public int getFinalScore() {
-        return finalScore;
+    /**
+     * Metod som är konstruktor 
+     * @param namn Player namn
+     */
+    public newPlayer(String namn) {
+        this.namn = namn;
     }
-
+    
+    //Metoder som är Setters
     public void setFinalScore(int finalScore) {
         this.finalScore = finalScore;
-    }
-
-    public void setDiscard(boolean[] discard) {
-        this.discard = discard;
-    }
-
-    public boolean[] getDiscard() {
-        return discard;
     }
 
     public void setDiscardEtt(boolean discardEtt) {
@@ -124,7 +119,76 @@ public class newPlayer {
     public void setDiscardYatzy(boolean discardYatzy) {
         this.discardYatzy = discardYatzy;
     }
+    
+    public void setNamn(String namn) {
+        this.namn = namn;
+    }
 
+    public void setEttor(int ettor) {
+        this.ettor = ettor;
+    }
+
+    public void setTvaor(int tvaor) {
+        this.tvaor = tvaor;
+    }
+
+    public void setTreor(int treor) {
+        this.treor = treor;
+    }
+
+    public void setFyror(int fyror) {
+        this.fyror = fyror;
+    }
+
+    public void setFemmor(int femmor) {
+        this.femmor = femmor;
+    }
+
+    public void setSexor(int sexor) {
+        this.sexor = sexor;
+    }
+
+    public void setEttPar(int ettPar) {
+        this.ettPar = ettPar;
+    }
+
+    public void setTvaPar(int tvaPar) {
+        this.tvaPar = tvaPar;
+    }
+
+    public void setTriss(int triss) {
+        this.triss = triss;
+    }
+
+    public void setFyrtal(int fyrtal) {
+        this.fyrtal = fyrtal;
+    }
+
+    public void setLitenStege(int litenStege) {
+        this.litenStege = litenStege;
+    }
+
+    public void setStorStege(int storStege) {
+        this.storStege = storStege;
+    }
+
+    public void setKak(int kak) {
+        this.kak = kak;
+    }
+
+    public void setChans(int chans) {
+        this.chans = chans;
+    }
+
+    public void setYatzy(int yatzy) {
+        this.yatzy = yatzy;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+    
+    //Metoder som returnerar värdet på en boolean
     public boolean isDiscardEtt() {
         return discardEtt;
     }
@@ -186,10 +250,12 @@ public class newPlayer {
     }
 
 
-    public newPlayer(String namn) {
-        this.namn = namn;
+    //Metoder som är getters
+    public int getFinalScore() {
+        return finalScore;
     }
 
+    
     public String getNamn() {
         return namn;
     }
@@ -258,73 +324,7 @@ public class newPlayer {
         return total;
     }
 
-    public void setNamn(String namn) {
-        this.namn = namn;
-    }
 
-    public void setEttor(int ettor) {
-        this.ettor = ettor;
-    }
-
-    public void setTvaor(int tvaor) {
-        this.tvaor = tvaor;
-    }
-
-    public void setTreor(int treor) {
-        this.treor = treor;
-    }
-
-    public void setFyror(int fyror) {
-        this.fyror = fyror;
-    }
-
-    public void setFemmor(int femmor) {
-        this.femmor = femmor;
-    }
-
-    public void setSexor(int sexor) {
-        this.sexor = sexor;
-    }
-
-    public void setEttPar(int ettPar) {
-        this.ettPar = ettPar;
-    }
-
-    public void setTvaPar(int tvaPar) {
-        this.tvaPar = tvaPar;
-    }
-
-    public void setTriss(int triss) {
-        this.triss = triss;
-    }
-
-    public void setFyrtal(int fyrtal) {
-        this.fyrtal = fyrtal;
-    }
-
-    public void setLitenStege(int litenStege) {
-        this.litenStege = litenStege;
-    }
-
-    public void setStorStege(int storStege) {
-        this.storStege = storStege;
-    }
-
-    public void setKak(int kak) {
-        this.kak = kak;
-    }
-
-    public void setChans(int chans) {
-        this.chans = chans;
-    }
-
-    public void setYatzy(int yatzy) {
-        this.yatzy = yatzy;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
 
     
 

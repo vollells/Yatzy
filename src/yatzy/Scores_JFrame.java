@@ -118,37 +118,37 @@ public class Scores_JFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPlace1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblPlayer1)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblScore1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPlace2)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblPlayer2)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblScore2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPlace4)
                                     .addComponent(lblPlace3))
-                                .addGap(50, 50, 50)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblPlayer3)
+                                        .addGap(192, 192, 192)
+                                        .addComponent(lblScore4))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
-                                        .addComponent(lblScore3))
+                                        .addComponent(lblScore3))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, 0)
-                                        .addComponent(lblPlayer4)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(lblScore4))))))
+                                        .addComponent(lblPlace2)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(lblPlayer2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblPlace1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(lblPlayer1))
+                                    .addComponent(lblPlayer3)
+                                    .addComponent(lblPlayer4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblScore1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblScore2, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,17 +164,17 @@ public class Scores_JFrame extends javax.swing.JFrame {
                     .addComponent(lblPlace1)
                     .addComponent(lblPlayer1)
                     .addComponent(lblScore1))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlace2)
                     .addComponent(lblPlayer2)
                     .addComponent(lblScore2))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlace3)
                     .addComponent(lblPlayer3)
                     .addComponent(lblScore3))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlace4)
                     .addComponent(lblPlayer4)
@@ -189,16 +189,27 @@ public class Scores_JFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metod som stänger ner detta förnster och öppnar ett nytt start fönster
+     * @param evt 
+     */
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         new mainPage_JFrame().setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnRestartActionPerformed
 
+    /**
+     * Metod som avslutar programet
+     * @param evt 
+     */
     private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnQuitActionPerformed
     
-    
+    /**
+     * Metod som sätter alla poäng och stänger av resten 
+     * ifall det finns mindre spelare
+     */
     private void scorePrint(){
         switch (numPlayers){
             case 0:

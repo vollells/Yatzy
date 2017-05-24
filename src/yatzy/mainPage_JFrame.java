@@ -8,7 +8,7 @@ package yatzy;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Klass som hanterar start sidan
  * @author victorlells
  */
 public class mainPage_JFrame extends javax.swing.JFrame {
@@ -156,6 +156,10 @@ public class mainPage_JFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Metod som hanterar hur många spelare 
+     * som ska vara med och med vilket namn
+     */
     private void btnStart(){
             
         if(txfPlayer1.getText().equals("Player 1")){
@@ -203,50 +207,59 @@ public class mainPage_JFrame extends javax.swing.JFrame {
         setVisible(false);
     
     }
+    
+    // Metod som gör att när knappen trycks ner börjar metoden btnStart
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         btnStart();
     }//GEN-LAST:event_btnStartActionPerformed
 
+    //Metod som sätter fälltet till blank när det får fokus 
     private void txfPlayer1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer1FocusGained
     txfPlayer1.setText("");
     }//GEN-LAST:event_txfPlayer1FocusGained
-
+    
+    //Metod som sätter fälltet till player1 när det förlorar fokus 
     private void txfPlayer1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer1FocusLost
         if(txfPlayer1.getText().equals("")){
             txfPlayer1.setText("Player 1");
         }
     }//GEN-LAST:event_txfPlayer1FocusLost
-
+    
+    //Metod som sätter fälltet till blank när det får fokus 
     private void txfPlayer2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer2FocusGained
     txfPlayer2.setText("");
     }//GEN-LAST:event_txfPlayer2FocusGained
-
+    
+    //Metod som sätter fälltet till player2 när det förlorar fokus 
     private void txfPlayer2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer2FocusLost
         if(txfPlayer2.getText().equals("")){
             txfPlayer2.setText("Player 2");
         }
     }//GEN-LAST:event_txfPlayer2FocusLost
-
+    //Metod som sätter fälltet till blank när det får fokus 
     private void txfPlayer3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer3FocusGained
     txfPlayer3.setText("");
     }//GEN-LAST:event_txfPlayer3FocusGained
-
+    
+    //Metod som sätter fälltet till player3 när det förlorar fokus 
     private void txfPlayer3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer3FocusLost
         if(txfPlayer3.getText().equals("")){
             txfPlayer3.setText("Player 3");
         }
     }//GEN-LAST:event_txfPlayer3FocusLost
-
+    //Metod som sätter fälltet till blank när det får fokus 
     private void txfPlayer4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusGained
         txfPlayer4.setText("");
     }//GEN-LAST:event_txfPlayer4FocusGained
-
+    
+    //Metod som sätter fälltet till player4 när det förlorar fokus 
     private void txfPlayer4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPlayer4FocusLost
         if(txfPlayer4.getText().equals("")){
             txfPlayer4.setText("Player 4");
         }
     }//GEN-LAST:event_txfPlayer4FocusLost
-
+    
+    //Metod som kontrollerar ifall enter är blir nedtryckt
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if(evt.getKeyCode() == 34){
             btnStart();
